@@ -10,8 +10,8 @@
         android:title="socket_服务器"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/waiting"
-        android:title="未完待续"
+        android:id="@+id/wating"
+        android:title="okhttp"
         app:showAsAction="never"/>
 
 </menu>

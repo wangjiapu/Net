@@ -1,6 +1,7 @@
 package com.example.com.net;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -9,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+import com.example.com.net.v.OkhttpActivity;
 
 
 public class MainActivity extends AppCompatActivity
@@ -176,9 +169,9 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this,"server"
                         ,Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.waiting:
-                Toast.makeText(MainActivity.this,"waiting"
-                        ,Toast.LENGTH_SHORT).show();
+            case R.id.wating:
+                Intent intent=new Intent(MainActivity.this,OkhttpActivity.class);
+                MainActivity.this.startActivity(intent);
                 break;
         }
         return true;
