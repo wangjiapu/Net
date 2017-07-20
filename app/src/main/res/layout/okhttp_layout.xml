@@ -1,20 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/ok_get"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="get请求"
-        android:layout_margin="20dp"/>
-    <Button
-        android:id="@+id/ok_post"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="post请求"
-        android:layout_margin="20dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/ok_get"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="get请求"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_post"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="post请求"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_file"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="post文件"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_string"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="post字符串"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_upload"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="上传文件"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_download"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="下载文件"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/ok_doBitmap"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="设置图片"
+            android:layout_margin="20dp"/>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
