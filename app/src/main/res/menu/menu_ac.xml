@@ -13,5 +13,9 @@
         android:id="@+id/wating"
         android:title="okhttp"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/read_data"
+        android:title="读取SqliteDemo中的数据"
+        app:showAsAction="always"/>
 
 </menu>

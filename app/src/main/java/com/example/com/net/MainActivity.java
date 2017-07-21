@@ -2,6 +2,8 @@ package com.example.com.net;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -10,11 +12,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     private TextView tv;
     private static String IP;
     private static String Wifi_IP;
+
+    private ListView lv;
 
     Handler handler=new Handler(){
         @Override
@@ -63,7 +70,9 @@ public class MainActivity extends AppCompatActivity
         tv=(TextView)findViewById(R.id.result);
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setOnMenuItemClickListener(this);
 
+        lv=(ListView)findViewById(R.id.listview);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +94,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        toolbar.setOnMenuItemClickListener(this);
+
     }
 
 
@@ -173,7 +182,40 @@ public class MainActivity extends AppCompatActivity
                 Intent intent=new Intent(MainActivity.this,OkhttpActivity.class);
                 MainActivity.this.startActivity(intent);
                 break;
+
+            case R.id.read_data:
+                context_read_data();
+                break;
         }
         return true;
+    }
+
+    /**
+     * 关于contentprovider读取sqliteDemo数据库中的数据
+     * 以listView的方式呈现出来
+     */
+    private void context_read_data() {
+        Uri uri=Uri.parse("content://com.example.com.sqlitedemo/person");
+        Cursor cursor=getContentResolver().query(
+                uri,//指定查询某个应用程序下的一张表
+                null,//指定查询的列名
+                null,//指定where的约束条件
+                null,//where的占位符
+                null//排序方式
+        );
+        if (cursor!=null){
+            while (cursor.moveToNext()){
+                Log.e("_id:",cursor.getInt(cursor.getColumnIndex("_id"))+"");
+
+            }
+        }else{
+            Log.e("cursor:","1111111111111");
+        }
+        Log.e("pppppppppppp","wwwwwwwwwwww");
+        SimpleCursorAdapter adapter=new SimpleCursorAdapter(this,
+                R.layout.list_item,cursor,
+                new String[]{"_id","name","age"},
+                new int[]{R.id.info_id,R.id.info_name,R.id.info_age});
+        lv.setAdapter(adapter);
     }
 }
