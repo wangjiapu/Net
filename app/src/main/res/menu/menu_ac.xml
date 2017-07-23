@@ -14,6 +14,10 @@
         android:title="okhttp"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/bg"
+        android:title="插件式换肤"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/read_data"
         android:title="读取SqliteDemo中的数据"
         app:showAsAction="always"/>

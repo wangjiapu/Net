@@ -2,10 +2,14 @@ package com.example.com.net;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +29,10 @@ import android.widget.Toast;
 
 import com.example.com.net.v.OkhttpActivity;
 
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 
 public class MainActivity extends AppCompatActivity
         implements Toolbar.OnMenuItemClickListener{
@@ -35,6 +43,10 @@ public class MainActivity extends AppCompatActivity
     private static String Wifi_IP;
 
     private ListView lv;
+    //插件路径及包名
+    private String mSkinPluginPath= Environment.getExternalStorageDirectory()
+            + File.separator+"app-release.apk";
+    private String mSkinPluginPkg="com.example.com.skin";
 
     Handler handler=new Handler(){
         @Override
@@ -186,8 +198,38 @@ public class MainActivity extends AppCompatActivity
             case R.id.read_data:
                 context_read_data();
                 break;
+            case R.id.bg:
+                loginPlugin(mSkinPluginPath,mSkinPluginPkg);
+                break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loginPlugin(String mSkinPluginPath, String mSkinPluginPkg) {
+
+        try {
+            AssetManager assetManager= AssetManager.class.newInstance();
+            Method addAssetPathMethod=assetManager.getClass().getMethod("addAssetPath",String.class);
+            addAssetPathMethod.invoke(assetManager, mSkinPluginPath);
+            Resources res=getResources();
+            Resources resources=new Resources(assetManager,
+                    res.getDisplayMetrics(),res.getConfiguration());
+            ResManager resManager=new ResManager(resources,mSkinPluginPkg);
+            Drawable drawable=resManager.getDrawableByresName("nn");
+            if (drawable!=null){
+                lv.setBackground(drawable);
+            }
+
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
